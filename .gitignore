@@ -481,3 +481,126 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 .azure
+以下是一个使用C语言实现公司管理数据库的示例程序，包含了员工、部门、职位和公司数据表的创建、插入、查询和显示等功能。
+
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_ENTRIES 100
+#define MAX_LENGTH 100
+
+// 定义数据表结构
+typedef struct {
+    int EmployeeID;
+    char Name[MAX_LENGTH];
+    int DepartmentID;
+    int PositionID;
+    char HireDate[MAX_LENGTH];
+    float Salary;
+} Employee;
+
+typedef struct {
+    int DepartmentID;
+    char DepartmentName[MAX_LENGTH];
+    int CompanyID;
+} Department;
+
+typedef struct {
+    int PositionID;
+    char PositionName[MAX_LENGTH];
+} Position;
+
+typedef struct {
+    int CompanyID;
+    char CompanyName[MAX_LENGTH];
+    int IndustryID;
+} Company;
+
+// 定义数据表数组和元素数量
+Employee employees[MAX_ENTRIES];
+int num_employees = 0;
+
+Department departments[MAX_ENTRIES];
+int num_departments = 0;
+
+Position positions[MAX_ENTRIES];
+int num_positions = 0;
+
+Company companies[MAX_ENTRIES];
+int num_companies = 0;
+
+// 定义插入数据的函数
+void insert_employee(Employee employee) {
+    employees[num_employees++] = employee;
+}
+
+void insert_department(Department department) {
+    departments[num_departments++] = department;
+}
+
+void insert_position(Position position) {
+    positions[num_positions++] = position;
+}
+
+void insert_company(Company company) {
+    companies[num_companies++] = company;
+}
+
+// 定义查询数据的函数
+Employee find_employee(int EmployeeID) {
+    for (int i = 0; i < num_employees; i++) {
+        if (employees[i].EmployeeID == EmployeeID) {
+            return employees[i];
+        }
+    }
+    Employee empty = {0, "", 0, 0, "", 0};
+    return empty;
+}
+
+Department find_department(int DepartmentID) {
+    for (int i = 0; i < num_departments; i++) {
+        if (departments[i].DepartmentID == DepartmentID) {
+            return departments[i];
+        }
+    }
+    Department empty = {0, "", 0};
+    return empty;
+}
+
+Position find_position(int PositionID) {
+    for (int i = 0; i < num_positions; i++) {
+        if (positions[i].PositionID == PositionID) {
+            return positions[i];
+        }
+    }
+    Position empty = {0, ""};
+    return empty;
+}
+
+Company find_company(int CompanyID) {
+    for (int i = 0; i < num_companies; i++) {
+        if (companies[i].CompanyID == CompanyID) {
+            return companies[i];
+        }
+    }
+    Company empty = {0, "", 0};
+    return empty;
+}
+
+// 定义显示数据的函数
+void display_employees() {
+    printf("Employees:\n");
+    for (int i = 0; i < num_employees; i++) {
+        printf("Employee ID: %d\n", employees[i].EmployeeID);
+        printf("Name: %s\n", employees[i].Name);
+        printf("Department ID: %d\n", employees[i].DepartmentID);
+        printf("Position ID: %d\n", employees[i].PositionID);
+        printf("Hire Date: %s\n", employees[i].HireDate);
+        printf("Salary: %.2f\n", employees[i].Salary);
+        printf("\n");
+    }
+}
+```
